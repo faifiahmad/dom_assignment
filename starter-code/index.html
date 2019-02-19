@@ -1,22 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DOM Clock</title>
+    <title>Digital Clock</title>
+    <!-- <script src="main.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
+<style>
+    .hand {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .clock {
+        width: 400px;
+        position: relative;
+        height: 400px;
+        background: url(images/clock_face.jpg);
+
+    }
+
+    body {
+        height: 100%;
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        height: 100;
+        justify-content: center;
+    }
+</style>
+
 <body>
-    <div class="digi_clock">
-        <!--./ clock goes in here! -->
-    </div>
 
-    <div class="analogue_clock">
-        <!--./ clock goes in here! -->
+    <div class="container">
+        <div class="clock">
+            <img id="hourhand" class="hand" src="images/hour_hand.png">
+            <img id="minutehand" class="hand" src="images/minute_hand.png">
+            <img id="sucendhand" class="hand" src="images/second_hand.png">
+        </div>
     </div>
+    <div id="myClock"></div>
+    <button id="demo" onclick="convert()">convert</button>
+    <script type="text/javascript">
+        function time() {
 
-    <div class="tbl_holder">
-        <!--./ clock goes in here! -->
-    </div>
+            var hourhand = document.getElementById("hourhand")
+            var minutehand = document.getElementById("minutehand")
+            var sucendhand = document.getElementById("sucendhand")
+
+            var date = new Date()
+            var h = date.getHours()
+            var m = date.getMinutes()
+            var s = date.getSeconds()
+            var session = "AM"
+
+            var hourdeg = h * 30
+            var mindeg = m * 6
+            var secdeg = s * 6
+
+            hourhand.style.transform = 'rotate(' + hourdeg + 'deg)'
+            minutehand.style.transform = 'rotate(' + mindeg + 'deg)'
+            sucendhand.style.transform = 'rotate(' + secdeg + 'deg)'
+
+            /*if (h > 12) {
+                h = h - 12
+                session = "PM"
+            }*/
+
+            var time = h + ":" + m + ":" + s
+            document.getElementById("myClock").innerText = time
+            document.getElementById("myClock").textContent = time
+        }
+
+
+        setInterval(time, 1000)
+
+        onclick = function convert() {
+            if (h > 12) {
+                h = h - 12
+            }
+
+        }
+
+
+
+    </script>
+
 </body>
+
 </html>
